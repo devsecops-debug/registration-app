@@ -12,25 +12,22 @@ pipeline {
             }
         }
 
-      stage("Checkout code from SCM") {
+        stage("Checkout code from SCM") {
             steps {
-              git url: 'https://github.com/devsecops-debug/registration-app', branch: 'main' ,  credentialsId:'github'
+                git url: 'https://github.com/devsecops-debug/registration-app', branch: 'main', credentialsId: 'github'
             }
         }
 
-     stage("Build Application) {
-        steps {
-          sh "mvn clean package"    
+        stage("Build Application") {  // Fixed Quotes
+            steps {
+                sh "mvn clean package"    
+            }
         }
-
-     }
      
-    stage("Test the Application) {
-        steps {
-          sh "mvn test"    
+        stage("Test the Application") {  // Fixed Quotes
+            steps {
+                sh "mvn test"    
+            }
         }
-
-     }
-
     }
 }
