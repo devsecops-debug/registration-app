@@ -1,0 +1,36 @@
+pipeline {
+    agent { label 'Jenkins-Agent' } 
+    tools {
+        
+        maven 'apache-maven-3.0.1' 
+    }
+    stages {
+        stage("Clean WorkSpace") {
+            steps {
+                // Clean before build
+                cleanWs()
+            }
+        }
+
+      stage("Checkout code from SCM") {
+            steps {
+              git url: 'https://github.com/devsecops-debug/registration-app', branch: 'main' ,  credentialsId:'github'
+            }
+        }
+
+     stage("Build Application) {
+        steps {
+          sh "mvn clean package"    
+        }
+
+     }
+     
+    stage("Test the Application) {
+        steps {
+          sh "mvn test"    
+        }
+
+     }
+
+    }
+}
